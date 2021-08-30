@@ -68,9 +68,11 @@ export const add = {
   data: function () {
     return {
       agregarCarritoByUsuarioIdUsuarioId: {
-        usuarioId: localStorage.getItem("user_id"),
-        productoId: "4",
+        agregarCarritoByUsuarioIdUsuarioId: localStorage.getItem("user_id")
       },
+      agregarCarritoByUsuarioIdProducto:{
+        producto_id: "4"
+      }
     };
   },
 

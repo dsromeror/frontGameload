@@ -9,9 +9,9 @@
       </tr>
 
       <tr v-for="product in carritoByUsuarioId" :key="product.producto_id">
-        <td>{{ product.producto_id}}</td>
-        <td>{{ product.cantidad}}</td>
-        <td>${{ product.precio }} COP</td>
+        <td>{{ product.productoId}}</td>
+        <td>{{ product.productoCantidad}}</td>
+        <td>${{ product.productoPrecio }} COP</td>
         <td><button v-on:click="add">Disminuir</button></td>
       </tr>
     </table>
@@ -21,6 +21,8 @@
 
 <script>
 import gql from "graphql-tag";
+
+const HEADER_NAME = 'authorization';
 
 export default {
   name: "Car",
@@ -51,7 +53,8 @@ export default {
       `,
       variables() {
         return {
-          carritoByUsuarioId: localStorage.getItem("user_id"),
+          carritoByUsuarioIdUsuarioId: localStorage.getItem("user_id"),
+          
         };
       },
     },
