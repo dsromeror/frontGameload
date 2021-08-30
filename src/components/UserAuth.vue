@@ -12,7 +12,7 @@
             <button type="submit">Iniciar Sesion</button>
             </form>
             <p>No tienes cuenta. Da click</p>
-            <button id="create" v-on:click="newuser"> Crear mi Cuenta </button>
+            <button id="create" v-on:click="$router.push({name:'newuser'})"> Crear mi Cuenta </button>
         </div>
 
     </div>

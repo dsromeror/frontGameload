@@ -4,13 +4,13 @@
       <h1>GameLoad</h1>
   
       <nav>
-        <button v-on:click="$router.push({name:'root'})"> Inicio </button>
-        <button v-on:click="$router.push({name:'user_auth'})"> Iniciar Sesión </button>
-        <button v-on:click="$router.push({name:'newuser'})"> Registrarse </button>
+        <button v-on:click="$router.push({name:'root'})" v-if="!is_auth"> Inicio </button>
+        <button v-on:click="$router.push({name:'user_auth'})" v-if="!is_auth"> Iniciar Sesión </button>
+        <button v-on:click="$router.push({name:'newuser'})" v-if="!is_auth"> Registrarse </button>
         <button v-on:click="init" v-if="is_auth" > Inicio </button>
-        <button v-on:click="account" v-if="is_auth" > Mi Cuenta </button>
-        <button v-on:click="transacction" v-if="is_auth" > Transacción </button>
-        <button v-on:click="historial" v-if="is_auth" > Historial </button>
+        <button v-on:click="products" v-if="is_auth" > Productos </button><!--cambiar luego, debe renderizar los productos disponibles-->
+        <button v-on:click="car" v-if="is_auth" > Mi Carrito </button><!--Cambiar y renderizar los productos cargados-->
+        <button v-on:click="historial" v-if="is_auth" > Ordenes </button><!--Cambiar a la orden confirmada y precio total-->
         <button v-on:click="logOut" v-if="is_auth" > Cerrar Sesión </button>
       </nav>
     </div>.
@@ -50,7 +50,7 @@
 </template>
 
 <script>
-/*
+
 import gql from 'graphql-tag'
 export default {
   name: 'App',
@@ -122,9 +122,23 @@ methods:{
     });
   },
 
+  products: function () {
+    this.$router.push({
+      name: "products",
+      params: { username: localStorage.getItem("current_username") },
+    });
+  },
+
   newuser: function () {
     this.$router.push({
       name: "newuser"
+    });
+  },
+
+  car: function () {
+    this.$router.push({
+      name: "car",
+      params: { username: localStorage.getItem("current_username") },
     });
   },
 
@@ -150,7 +164,7 @@ methods:{
     await this.updateAccessToken();
     },
   },
-};*/
+};
 </script>
 
 <style>
