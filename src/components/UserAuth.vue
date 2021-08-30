@@ -11,7 +11,8 @@
                 <br>
             <button type="submit">Iniciar Sesion</button>
             </form>
-            <p>No tienes cuenta. Da click <a>Ingresar</a></p>
+            <p>No tienes cuenta. Da click</p>
+            <button id="create" v-on:click="newuser"> Crear mi Cuenta </button>
         </div>
 
     </div>
@@ -85,6 +86,10 @@ export default {
         flex-direction: column;
         justify-content: center;
         align-items: center;
+    }
+
+    #create{
+        width: 50%;
     }
 
     .auth_user h2{

@@ -1,7 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import App from './App.vue'
 import User from './components/User'
+import Root from './components/Root'
 import UserAuth from './components/UserAuth'
+import NewUser from './components/NewUser'
 import Account from './components/Account'
 import Historial from './components/Historial'
 import Transacction from './components/Transacction.vue'
@@ -9,12 +11,17 @@ import Transacction from './components/Transacction.vue'
 const routes = [{
         path: '/',
         name: 'root',
-        component: App
+        component: Root
     },
     {
         path: '/user/auth',
         name: "user_auth",
         component: UserAuth
+    },
+    {
+        path: '/newuser',
+        name: "newuser",
+        component: NewUser
     },
     {
         path: '/user/:username',
@@ -35,9 +42,7 @@ const routes = [{
         path: '/transacction/:username',
         name: "transacction",
         component: Transacction
-    }
-
-    
+    }    
 ]
 
 const router = createRouter({

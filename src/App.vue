@@ -4,13 +4,16 @@
       <h1>GameLoad</h1>
   
       <nav>
+        <button v-on:click="$router.push({name:'root'})"> Inicio </button>
+        <button v-on:click="$router.push({name:'user_auth'})"> Iniciar Sesión </button>
+        <button v-on:click="$router.push({name:'newuser'})"> Registrarse </button>
         <button v-on:click="init" v-if="is_auth" > Inicio </button>
         <button v-on:click="account" v-if="is_auth" > Mi Cuenta </button>
         <button v-on:click="transacction" v-if="is_auth" > Transacción </button>
         <button v-on:click="historial" v-if="is_auth" > Historial </button>
         <button v-on:click="logOut" v-if="is_auth" > Cerrar Sesión </button>
       </nav>
-    </div>
+    </div>.
 
     <div class="main-component">
       <router-view v-on:log-in="logIn"></router-view>
@@ -47,7 +50,7 @@
 </template>
 
 <script>
-
+/*
 import gql from 'graphql-tag'
 export default {
   name: 'App',
@@ -119,6 +122,12 @@ methods:{
     });
   },
 
+  newuser: function () {
+    this.$router.push({
+      name: "newuser"
+    });
+  },
+
   transacction: function () {
     this.$router.push({
       name: "transacction",
@@ -141,7 +150,7 @@ methods:{
     await this.updateAccessToken();
     },
   },
-};
+};*/
 </script>
 
 <style>
