@@ -22,7 +22,6 @@
   </div>
 </template>
 
-
 <script>
 import gql from "graphql-tag";
 
@@ -34,6 +33,9 @@ export default {
       usuarioId: localStorage.getItem("user_id"),
       carritoByUsuarioId: [],
       crearOrdenUsuarioId: "null",
+      disminuirProductoByCarrito: {
+        producto_id: "",
+      },
     };
   },
 
@@ -90,7 +92,35 @@ export default {
           alert("Error");
       });
     },
-  }
+
+    remove: async function(producto_id){
+    this.CarritoInput.producto_id = producto_id
+    await this.$apollo
+      .mutate({
+        mutation: gql`
+          mutation ($disminuirProductoByCarritoCarrito: CarritoInput!) {
+            disminuirProductoByCarrito(carrito: $disminuirProductoByCarritoCarrito) {
+              carrito_id
+              usuarioId
+              productoId
+              productoCantidad
+              productoPrecio
+            }
+          }
+        `,  
+        variables:{
+          disminuirProductoByCarritoCarrito: localStorage.getItem("user_id").replace(/^(0+)/g, ''),
+          //CarritoInput: this.CarritoInput,
+        },
+      })
+      .then((result) => {
+        alert("Reducción de producto exitoso")
+      })
+      .catch((error) => {
+          alert("Error");
+      });
+    },
+  },
 };
 
 </script>

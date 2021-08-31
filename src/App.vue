@@ -142,6 +142,13 @@ methods:{
     });
   },
 
+  order: function () {
+    this.$router.push({
+      name: "order",
+      params: { username: localStorage.getItem("current_username") },
+    });
+  },
+
   transacction: function () {
     this.$router.push({
       name: "transacction",
