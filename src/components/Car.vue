@@ -7,6 +7,7 @@
         <th>Cantidad</th>
         <th>Precio</th>
         <th>Disminuir</th>
+        <th>Eliminar</th>
       </tr>
 
       <tr v-for="product in carritoByUsuarioId" :key="product.producto_id">
@@ -14,7 +15,8 @@
         <td>{{ product.productoNombre}}</td>
         <td>{{ product.productoCantidad}}</td>
         <td>${{ product.productoPrecio }} COP</td>
-        <td><button v-on:click="remove(product.producto_id)">Disminuir</button></td>
+        <td><button v-on:click="remove(product)">Disminuir</button></td>
+        <td><button v-on:click="deletep(product)">Eliminar</button></td>
       </tr>
     </table>
     <h2>Total: </h2>
@@ -33,8 +35,13 @@ export default {
       usuarioId: localStorage.getItem("user_id"),
       carritoByUsuarioId: [],
       crearOrdenUsuarioId: "null",
-      disminuirProductoByCarrito: {
-        producto_id: "",
+      disminuirProductoByCarritoCarrito: {
+        carrito_id: "",
+        usuarioId: "",
+        productoId: "",
+        productoNombre: "",
+        productoCantidad: "",
+        productoPrecio: "",
       },
     };
   },
@@ -93,8 +100,13 @@ export default {
       });
     },
 
-    remove: async function(producto_id){
-    this.CarritoInput.producto_id = producto_id
+    remove: async function(producto){
+    this.disminuirProductoByCarritoCarrito.carrito_id = producto.carrito_id
+    this.disminuirProductoByCarritoCarrito.usuarioId = producto.usuarioId
+    this.disminuirProductoByCarritoCarrito.productoId = producto.productoId
+    this.disminuirProductoByCarritoCarrito.productoNombre = producto.productoNombre
+    this.disminuirProductoByCarritoCarrito.productoCantidad = producto.productoCantidad
+    this.disminuirProductoByCarritoCarrito.productoPrecio = producto.productoPrecio
     await this.$apollo
       .mutate({
         mutation: gql`
@@ -103,14 +115,14 @@ export default {
               carrito_id
               usuarioId
               productoId
+              productoNombre
               productoCantidad
               productoPrecio
             }
           }
         `,  
         variables:{
-          disminuirProductoByCarritoCarrito: localStorage.getItem("user_id").replace(/^(0+)/g, ''),
-          //CarritoInput: this.CarritoInput,
+          disminuirProductoByCarritoCarrito: this.disminuirProductoByCarritoCarrito,
         },
       })
       .then((result) => {
