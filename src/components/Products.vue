@@ -12,13 +12,13 @@
       </tr>
 
       <tr v-for="product in productosDisponibles" :key="product.producto_id">
-        <td>{{ product.producto_id}}</td>
+        <td>{{ product.producto_id}} </td>
         <td>{{ product.categoria}}</td>
         <td>{{ product.codigo }}</td>
         <td>{{ product.nombre }}</td>
         <td>${{ product.precio }} COP</td>
         <td>${{ product.imagen }} COP</td>
-        <td><button v-on:click="add">Agregar</button></td>
+        <td><button v-on:click="add(product.producto_id)">Agregar</button></td>
       </tr>
     </table>
   </div>
@@ -33,6 +33,9 @@ export default {
   data: function () {
     return {
       productosDisponibles: [],
+      agregarCarritoByUsuarioIdProducto: {
+        producto_id: "",
+      },
     };
   },
 
@@ -61,38 +64,27 @@ export default {
       },
     },
   },
-};
-
-export const add = {
-  name: "addProducts",
-  data: function () {
-    return {
-      agregarCarritoByUsuarioIdUsuarioId: {
-        agregarCarritoByUsuarioIdUsuarioId: localStorage.getItem("user_id")
-      },
-      agregarCarritoByUsuarioIdProducto:{
-        producto_id: "4"
-      }
-    };
-  },
 
   methods:{
-    add: async function(){
+    add: async function(producto_id){
+    this.agregarCarritoByUsuarioIdProducto.producto_id = producto_id
     await this.$apollo
       .mutate({
         mutation: gql`
-          mutation Mutation($agregarCarritoByUsuarioIdUsuarioId: String!, $agregarCarritoByUsuarioIdProducto: ProductoInput) {
+          mutation ($agregarCarritoByUsuarioIdUsuarioId: String!, $agregarCarritoByUsuarioIdProducto: ProductoInput) {
             agregarCarritoByUsuarioId(usuarioId: $agregarCarritoByUsuarioIdUsuarioId, producto: $agregarCarritoByUsuarioIdProducto) {
               carrito_id
               usuarioId
               productoId
+              productoNombre
               productoCantidad
               productoPrecio
             }
           }
         `,  
         variables:{
-          agregarCarritoByUsuarioId: this.agregarCarritoByUsuarioId,
+          agregarCarritoByUsuarioIdUsuarioId: localStorage.getItem("user_id").replace(/^(0+)/g, ''),
+          agregarCarritoByUsuarioIdProducto: this.agregarCarritoByUsuarioIdProducto,
         },
       })
       .then((result) => {
@@ -103,7 +95,9 @@ export const add = {
       });
     },
   }
-}; 
+  
+};
+
 </script>
 
 <style>

@@ -3,6 +3,7 @@
     <table>
       <tr>
         <th>Producto Id</th>
+        <th>Nombre</th>
         <th>Cantidad</th>
         <th>Precio</th>
         <th>Disminuir</th>
@@ -10,19 +11,20 @@
 
       <tr v-for="product in carritoByUsuarioId" :key="product.producto_id">
         <td>{{ product.productoId}}</td>
+        <td>{{ product.productoNombre}}</td>
         <td>{{ product.productoCantidad}}</td>
         <td>${{ product.productoPrecio }} COP</td>
-        <td><button v-on:click="add">Disminuir</button></td>
+        <td><button v-on:click="remove(product.producto_id)">Disminuir</button></td>
       </tr>
     </table>
+    <h2>Total: </h2>
+    <button v-on:click="confirm">Confirmar carrito</button>
   </div>
 </template>
 
 
 <script>
 import gql from "graphql-tag";
-
-const HEADER_NAME = 'authorization';
 
 export default {
   name: "Car",
@@ -31,6 +33,7 @@ export default {
     return {
       usuarioId: localStorage.getItem("user_id"),
       carritoByUsuarioId: [],
+      crearOrdenUsuarioId: "null",
     };
   },
 
@@ -46,6 +49,7 @@ export default {
             carrito_id
             usuarioId
             productoId
+            productoNombre
             productoCantidad
             productoPrecio
           }
@@ -53,12 +57,40 @@ export default {
       `,
       variables() {
         return {
-          carritoByUsuarioIdUsuarioId: localStorage.getItem("user_id"),
-          
+          carritoByUsuarioIdUsuarioId: localStorage.getItem("user_id").replace(/^(0+)/g, ''),
         };
       },
     },
   },
+
+  methods:{
+    confirm: async function(){
+    await this.$apollo
+      .mutate({
+        mutation: gql`
+          mutation CrearOrdenMutation($crearOrdenUsuarioId: String!) {
+            crearOrden(usuarioId: $crearOrdenUsuarioId) {
+              fechaCompra
+              codigoOrden
+              usuarioId
+              productoCantidad
+              productoPrecio
+              estado
+            }
+          }
+        `,  
+        variables:{
+          crearOrdenUsuarioId: localStorage.getItem("user_id"),
+        },
+      })
+      .then((result) => {
+        alert("Orden creada")
+      })
+      .catch((error) => {
+          alert("Error");
+      });
+    },
+  }
 };
 
 </script>

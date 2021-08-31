@@ -6,6 +6,7 @@ import UserAuth from './components/UserAuth'
 import NewUser from './components/NewUser'
 import Products from './components/Products'
 import Car from './components/Car'
+import Order from './components/Order'
 import Account from './components/Account'
 import Historial from './components/Historial'
 import Transacction from './components/Transacction.vue'
@@ -44,6 +45,11 @@ const routes = [{
         path: '/account/:username',
         name: "account",
         component: Account
+    },
+    {
+        path: '/order/:username',
+        name: "order",
+        component: Order
     },
     {
         path: '/historial/:username',
