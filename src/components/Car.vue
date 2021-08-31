@@ -82,7 +82,7 @@ export default {
           }
         `,  
         variables:{
-          crearOrdenUsuarioId: localStorage.getItem("user_id"),
+          crearOrdenUsuarioId: localStorage.getItem("user_id").replace(/^(0+)/g, ''),
         },
       })
       .then((result) => {
