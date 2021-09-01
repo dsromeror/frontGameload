@@ -1,32 +1,45 @@
 <template>
-    <div id="AuthUser" class="auth_user">
-        
-        <div class="container_auth_user">
-            <h2>Autenticarse</h2>
+    <div class="wrapper__login">
 
-            <form v-on:submit.prevent="processAuthUser" >
-                <input type="text" v-model="user_in.username" placeholder="Username">
-                <br>
-                <input type="password" v-model="user_in.password" placeholder="Password">
-                <br>
-            <button type="submit">Iniciar Sesion</button>
-            </form>
-            <p>No tienes cuenta. Da click</p>
-            <button id="create" v-on:click="$router.push({name:'newuser'})"> Crear mi Cuenta </button>
-        </div>
+        <div class="contain content1">
 
-    </div>
+            <div class="cabecero">
+                <h2>{{ msg }}</h2>
+                <p>Mejorar tu experiencia de compra y te dara acceso a la mejor opción del mercado.</p>
+            </div>
+
+			<form class="form" v-on:submit.prevent="processAuthUser">
+				<fieldset>
+					<div class="col">
+						<label>USUARIO <span class="tooltip">?</span></label>
+						<input type="text" id="usuario"  v-model="user_in.username" placeholder="Username" required />
+
+						<label>CONTRASEÑA <span class="tooltip">?</span></label>
+						<input type="password" id="contraseña"  v-model="user_in.password" placeholder="Password" required />
+					</div>
+				</fieldset>
+
+                <Button title="Iniciar Sesión" class="regular" type="submit"/>
+                        
+                <p>No tienes cuenta. Da click</p>
+                <hr/>
+                <Button title="Crear mi cuenta" class="optional" id="create" v-on:click="$router.push({name:'newuser'})" />
+			</form>
+		</div>
+	</div>
 </template>
 
 <script>
+import Button from './Button.vue'
 import gql from 'graphql-tag'
 import jwt_decode from "jwt-decode"
 
 export default {
     name: "UserAuth",
-    
+    components: { Button },
     data: function(){
         return {
+            msg: 'Ingresar',
             user_in: {
                 username:"",
                 password:""
@@ -64,72 +77,93 @@ export default {
 </script>
 
 <style>
-    .auth_user{
-        margin: 0;
-        padding: 0%;
-        height: 100%;
+    .wrapper__login {
+        align-items:center;
+        background: var(--secundary-color);
+        display: flex;
+        flex-flow:column;
+        justify-content:center;
+        min-height: 100%;
         width: 100%;
+        color: var(--primary-color);
+    }
+    .content1 {
+        display: flex;
+        flex-flow:column;
+        padding-bottom: 100px;
+        text-align: center;
+        width: 430px;
+    }
+    .cabecero {
+        display: block;
+        margin-left: 20px;
+        margin-right: auto;
+        padding: 30px;
+    }
+    .cabecero h2 {
+        font-size: 2em;
+        font-weight: 700;
+        font-family: var(--ff-secondary);
+        letter-spacing: var(--spacing);
+    }
+    .cabecero p {
+        float: left;
+        width: 96%;
+        padding: 16px 0;
+    }
+    .form {
+        margin:0 auto;
+        padding-bottom: 30px;
+        text-align: center;
+        width: 96%;
+    }
+    .col {
+        width: 90%;   
+    }
+    .form label {
+        color: var(--primary-color);
+        display: block;
+        font-size: 16px;
+        margin-bottom: 5px;
+        text-transform: uppercase;
+    }
+    .form .tooltip {
+        background: var(--primary-color);
+        border-radius: 50%;
+        color: var(--secundary-color);
+        display: inline-block;
+        height: 16px; width: 16px;
+        line-height: 18px;
+        margin-bottom: 3px;
+        text-align: center;
+        vertical-align: middle;
+    }
+    .form input[type="text"], .form input[type="password"], .form input[type="email"],form select {
+        background: #f1f1f1;
+        border: 0;
+        display: block;
+        height: 35px;
+        margin-bottom: 15px;
+        padding: 5px;
+        width: 100%;
+    }
+    .form p {
+        color: var(--primary-color);
+        display: inline-block;
+        font-size: 14px;
+        margin-bottom: 30px;
+        margin-top: 16px;
+        width: 90%;
+    }
     
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
+    hr {
+        margin: -15px 0 20px 0;
     }
 
-    .container_auth_user {
-        border: 3px solid  #283747;
-        border-radius: 10px;
-        width: 25%;
-        height: 60%;
-        
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
-
-    #create{
-        width: 50%;
-    }
-
-    .auth_user h2{
-        color: #283747;
-
-    }
-
-    .auth_user form{
-        width: 50%;
-        
-    }
-
-    .auth_user input{
-        height: 40px;
-        width: 100%;
-
-        box-sizing: border-box;
-        padding: 10px 20px;
-        margin: 5px 0;
-
-        border: 1px solid #283747;
-        
-    }
-
-    .auth_user button{
-        width: 100%;
-        height: 40px;
-
-        color: #E5E7E9;
-        background: #283747;
-        border: 1px solid #E5E7E9;
-
-        border-radius: 5px;
-        padding: 10px 25px;
-        margin: 5px 0;
-    }
-
-    .auth_user button:hover{
-        color: #E5E7E9;
-        background: crimson;
-        border: 1px solid #283747;
+    @media (max-width: 370px){
+        .cabecero p { font-size: 16px;}
+        .content1 { width: 350px}
+        .form input[type="text"].small { width: 28.5%;}
+        .form label { font-size: 13px;}
     }
 </style>

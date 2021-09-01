@@ -9,50 +9,47 @@
         <h2>{{ msg1 }}</h2>
         <p>Es rápido y fácil.</p>
       </div>
-      <div id="NewUser" class="newuser">
-        <form v-on:submit.prevent="proccessUser">
-          <input
-            type="text"
-            v-model="createUserUser.username"
-            placeholder="Usuario"
-          />
-          <br />
-          <input
-            type="text"
-            v-model="createUserUser.name"
-            placeholder="Nombre"
-          />
-          <br />
-          <input
-            type="password"
-            v-model="createUserUser.password"
-            placeholder="contraseña"
-          />
-          <br />
-          <input
-            type="email"
-            v-model="createUserUser.email"
-            placeholder="email"
-          />
-          <br />
-          <input
-            type="text"
-            v-model="createUserUser.address"
-            placeholder="Dirección"
-          />
-          <br />
-          <button type="submit">Crear cuenta</button>
-        </form>
-      </div>
+
+      <form class="form" v-on:submit.prevent="proccessUser">
+				<fieldset>
+
+					<div class="col">
+            <label>USUARIO <span class="tooltip">?</span></label>
+						<input type="text" id="usuario" placeholder="username" v-model="createUserUser.username" required>
+
+						<label>EMAIL <span class="tooltip">?</span></label>
+						<input type="email" placeholder="email" v-model="createUserUser.email" required>
+
+            <label>CONTRASEÑA <span class="tooltip">?</span></label>
+						<input type="password"  placeholder="password" v-model="createUserUser.password" required>
+					</div>
+
+					<div class="col">
+            <label>NOMBRE <span class="tooltip">?</span></label>
+						<input type="text" id="nombre"  placeholder="nombre" v-model="createUserUser.name" required>
+
+            <label>DIRECCIÓN<span class="tooltip">?</span></label>
+						<input type="text" id="direccion"  placeholder="dirección" v-model="createUserUser.address" required>
+
+					</div>
+
+				</fieldset>
+        <p>Al hacer clic en "Registrarte", aceptas nuestras <span class="resaltado">Condiciones</span>, la <span class="resaltado">Política de datos</span> y la <span class="resaltado">Política de cookies</span>. Es posible que te enviemos notificaciones por SMS, que puedes desactivar cuando quieras.</p>
+   
+				<Button title="Crear cuenta" class="regular" type="submit"/>
+
+			</form>
 		</div>
 	</div>
 </template>
 
 <script>
+import Button from '../components/Button.vue'
 import gql from "graphql-tag";
 
 export default {
   name: "NewUser",
+  components: { Button },
 
   data: function () {
     return {
@@ -94,30 +91,9 @@ export default {
     },
   },
 };
-
-
-
 </script>
 
 <style scope>
-.wrapper__login {
-  align-items:center;
-  background: var(--secundary-color);
-  display: flex;
-  flex-flow:column;
-  justify-content:center;
-  min-height: 100%;
-  width: 100%;
-  color: var(--primary-color);
-}
-
-.content1 {
-  display: flex;
-  flex-flow:column;
-  padding-bottom: 100px;
-  text-align: center;
-  width: 430px;
-}
 .registro { 
   display: flex;
 }
@@ -142,6 +118,7 @@ export default {
 }
 .cabecero p {
   float: left;
+  height: 700;
   padding: 16px 0;
   width: 96%;
 }
