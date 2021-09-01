@@ -1,7 +1,7 @@
 <template>
   <div id="app" class="app">
     <div class="header">
-      <h1>GameLoad</h1>
+      <h1><img src="./assets/Frame.svg"></h1>
   
       <nav>
         <button v-on:click="$router.push({name:'root'})" v-if="!is_auth"> Inicio </button>
@@ -16,6 +16,7 @@
     </div>.
 
     <div class="main-component">
+      <h1>Hola</h1>
       <router-view v-on:log-in="logIn"></router-view>
     </div>
 
@@ -56,6 +57,7 @@ export default {
   name: 'App',
   data: function(){
     return{
+      productosDisponibles: [],
       is_auth: false
     }
 },
@@ -162,6 +164,7 @@ methods:{
       params: { username: localStorage.getItem("current_username") },
     });
   },
+
   logOut: async function(){
     localStorage.removeItem('access_token')
     localStorage.removeItem('refresh_token')
@@ -249,10 +252,10 @@ methods:{
     height: 75vh;
     margin: 0%;
     padding: 0%;
-
+    display: flex;
     background: #FDFEFE ;
   }
- 
+
  .all-footer{
     align-items: center;
     background: var(--primary-color);

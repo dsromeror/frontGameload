@@ -50,6 +50,7 @@ export default {
                 productoId
                 productoCantidad
                 productoPrecio
+                productoNombre
                 estado
             }
         }

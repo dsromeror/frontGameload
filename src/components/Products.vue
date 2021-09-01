@@ -1,26 +1,11 @@
 <template>
-  <div id="Productos">
-    <table>
-      <tr>
-        <th>Producto Id</th>
-        <th>Categoria</th>
-        <th>Codigo</th>
-        <th>Nombre</th>
-        <th>Precio</th>
-        <th>Imagen</th>
-        <th>Agregar</th>
-      </tr>
-
-      <tr v-for="product in productosDisponibles" :key="product.producto_id">
-        <td>{{ product.producto_id}} </td>
-        <td>{{ product.categoria}}</td>
-        <td>{{ product.codigo }}</td>
-        <td>{{ product.nombre }}</td>
-        <td>${{ product.precio }} COP</td>
-        <td>${{ product.imagen }} COP</td>
-        <td><button v-on:click="add(product.producto_id)">Agregar</button></td>
-      </tr>
-    </table>
+  <div class="card" v-for="product in productosDisponibles" :key="product.producto_id"> 
+    <p>{{ product.nombre}}</p>
+    <div class="imagen_juego">
+      <img v-bind:src="product.imagen">
+    </div>
+    <p>${{ product.precio}} COP</p>
+    <button v-on:click="add(product.producto_id)">Agregar <i class="fas fa-shopping-cart carrito"></i></button>
   </div>
 </template>
 
@@ -101,6 +86,38 @@ export default {
 </script>
 
 <style>
+.card{
+  border: black solid 1px;
+  border-radius: 10px;
+  padding: 10px 30px;
+  margin: 170px 30px;
+  height: 40vh;
+  width: 15vw;
+  justify-content: space-between;
+  text-align: center;
+  background-color: #ebeff5;
+}
+
+.card p{
+  font-weight: 400;
+}
+
+.card:hover{
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
+}
+
+.card button{
+  width: 150px;
+  background: #00669F;
+  color: white;
+}
+
+.card button:hover{
+    background-color: #ff7300;
+    box-shadow: 0px 2px 4px 2px rgb(219, 11, 11);
+}
+
 #Productos {
   width: 100%;
   height: 120%;

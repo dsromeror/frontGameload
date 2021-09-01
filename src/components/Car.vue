@@ -3,7 +3,7 @@
     <table>
       <tr>
         <th>Producto Id</th>
-        <th>Nombre</th>
+        <th>Nombre del producto</th>
         <th>Cantidad</th>
         <th>Precio</th>
         <th>Disminuir</th>
@@ -15,12 +15,12 @@
         <td>{{ product.productoNombre}}</td>
         <td>{{ product.productoCantidad}}</td>
         <td>${{ product.productoPrecio }} COP</td>
-        <td><button v-on:click="remove(product)">Disminuir</button></td>
-        <td><button v-on:click="deletep(product)">Eliminar</button></td>
+        <td><button v-on:click="remove(product)"><i class="fas fa-minus"></i></button></td>
+        <td><button v-on:click="del(product)"><i class="fas fa-trash"></i></button></td>
       </tr>
     </table>
     <h2>Total: </h2>
-    <button v-on:click="confirm">Confirmar carrito</button>
+    <button class="confirm" v-on:click="confirm">Confirmar carrito</button>
   </div>
 </template>
 
@@ -42,6 +42,9 @@ export default {
         productoNombre: "",
         productoCantidad: "",
         productoPrecio: "",
+      },
+      eliminarProductoCarritoByUsuarioIdAndProductoIdProductoId: {
+        productoId: "",
       },
     };
   },
@@ -93,7 +96,7 @@ export default {
         },
       })
       .then((result) => {
-        alert("Orden creada")
+        alert("Carrito confirmado")
       })
       .catch((error) => {
           alert("Error");
@@ -132,6 +135,28 @@ export default {
           alert("Error");
       });
     },
+
+    del: async function(productoId){
+    this.eliminarProductoCarritoByUsuarioIdAndProductoIdProductoId.productoId = productoId
+    await this.$apollo
+      .mutate({
+        mutation: gql`
+          mutation Mutation($eliminarProductoCarritoByUsuarioIdAndProductoIdUsuarioId: String!, $eliminarProductoCarritoByUsuarioIdAndProductoIdProductoId: String!) {
+            eliminarProductoCarritoByUsuarioIdAndProductoId(usuarioId: $eliminarProductoCarritoByUsuarioIdAndProductoIdUsuarioId, productoId: $eliminarProductoCarritoByUsuarioIdAndProductoIdProductoId)
+          }
+        `,  
+        variables:{
+          eliminarProductoCarritoByUsuarioIdAndProductoIdUsuarioId: localStorage.getItem("user_id").replace(/^(0+)/g, ''),
+          eliminarProductoCarritoByUsuarioIdAndProductoIdProductoId: this.eliminarProductoCarritoByUsuarioIdAndProductoIdProductoId,
+        },
+      })
+      .then((result) => {
+        alert("Producto eliminado de forma exitosa")
+      })
+      .catch((error) => {
+          alert("Error");
+      });
+    },
   },
 };
 
@@ -153,12 +178,15 @@ export default {
   border-collapse: collapse;
   border: 1px solid rgba(0, 0, 0, 0.3);
   border-radius: 20px;
+  text-align: center;
+  align-items: center;
 }
 
 #Carrito table td,
 #Carrito table th {
   border: 1px solid #ddd;
   padding: 8px;
+  text-align: center;
 }
 
 #Carrito table tr:nth-child(even) {
@@ -175,5 +203,16 @@ export default {
   text-align: left;
   background-color: crimson;
   color: white;
+}
+
+.confirm{
+  width: 150px;
+  background: #00669F;
+  color: white;
+}
+
+.confirm:hover{
+    background-color: #ff7300;
+    box-shadow: 0px 2px 4px 2px rgb(219, 11, 11);
 }
 </style>
