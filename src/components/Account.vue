@@ -83,7 +83,7 @@ export default {
   color: #283747;
 }
 #Account span {
-  color: crimson;
+  color: var(--heavy-blue);
   font-weight: bold;
 }
 </style>

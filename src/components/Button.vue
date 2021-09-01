@@ -19,6 +19,7 @@ export default {
   font-weight: 700;
   font-size: 1em;
   margin-right: 0;
+  margin-left: 16px;
   padding: 8px 12px;
   text-transform: uppercase;
   cursor: pointer;

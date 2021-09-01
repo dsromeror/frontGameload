@@ -1,7 +1,6 @@
 <template>
   <div id="app" class="app">
     <div class="header">
-      <h1>GameLoad</h1>
   
       <nav>
         <button v-on:click="$router.push({name:'root'})" v-if="!is_auth"> Inicio </button>
@@ -13,13 +12,16 @@
         <button v-on:click="order" v-if="is_auth" > Ordenes </button><!--Cambiar a la orden confirmada y precio total-->
         <button v-on:click="logOut" v-if="is_auth" > Cerrar Sesión </button>
       </nav>
+
+      <Header />
+      <SubNav />
     </div>.
 
     <div class="main-component">
       <router-view v-on:log-in="logIn"></router-view>
     </div>
 
-    <div class="all-footer">
+    <!-- <div class="all-footer">
 
       <figure class="logo-footer">
           <img src="./assets/Logos/logoWhite.png" alt="Logo">
@@ -45,15 +47,22 @@
         <i id="youtube" class="fab fa-youtube"></i>
         <i id="insta" class="fab fa-instagram"></i>
       </div>
+    </div> -->
+    <div class="footer">
+      <Footer />
     </div>
   </div>
 </template>
 
 <script>
-
+import Header from './components/Header.vue'
+import SubNav from './components/SubNav.vue'
+import Footer from './components/Footer.vue'
 import gql from 'graphql-tag'
+
 export default {
   name: 'App',
+  components: { Header, SubNav, Footer },
   data: function(){
     return{
       is_auth: false
@@ -175,7 +184,30 @@ methods:{
 </script>
 
 <style>
-  :root {
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&family=Roboto:wght@100;300;400;500;900&display=swap');
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+:root {
   --primary-color: #0D0D0D;
   --palette-pink: #EE05F2 ;
   --heavy-blue: #0378A6;
@@ -193,101 +225,13 @@ methods:{
   --max-width: 1170px;
   --fixed-width: 620px;
   }
-  body{
-    margin: 0 0 0 0;
-  }
+*{
+  box-sizing: border-box;
+}
+footer {
+  bottom: 0;
+  left: 0px;
+  width: 100%;
+}
 
-  .header{
-    position: fixed;
-    left: 0px;
-    top: 0px;
-    width: 100%;
-    height: 100px;
-    margin: 0%;
-    padding: 0;
-
-    background-color:var(--primary-color) ;
-    color:#E5E7E9  ;
-
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .header h1{
-    width: 20%;
-    text-align: center;
-  }
-
-  .header nav {
-    height: 100%;
-    width: 40%;
-
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-
-    font-size: 20px;
-  }
-
-  .header nav button{
-    color: #E5E7E9;
-    background: #283747;
-    border: 1px solid #E5E7E9;
-
-    border-radius: 5px;
-    padding: 10px 20px;
-  }
-
-  .header nav button:hover{
-    color: #283747;
-    background: #E5E7E9;
-    border: 1px solid #E5E7E9;
-  }
-
-  .main-component{
-    height: 75vh;
-    margin: 0%;
-    padding: 0%;
-
-    background: #FDFEFE ;
-  }
- 
- .all-footer{
-    align-items: center;
-    background: var(--primary-color);
-    bottom: 0;
-    color:var(--secundary-color);
-    display: flex;
-    grid-gap: 80px;
-    height: auto;
-    justify-content: center;
-    padding: 20px 0;
-    position: absolute;
-    width: 100%;
-  }
-  .logo-footer img {
-    height: 80px;
-    margin: 0 20px;
-    vertical-align: bottom;
-    align-items: flex-start;
-  }
-  .all-footer a {
-    text-decoration: none;
-    color: var(--secundary-color);
-    text-transform: uppercase;
-    display: flex;
-    font-weight: 500;
-    align-items: center;
-    padding: 0 20px;
-  }
-  .socilamedia i {
-    font-size: 30px;cursor: pointer;
-  }
-  .sponsor {
-    display: flex;
-  }
-  .sponsor img {
-    height: 5%;  
-  }
 </style>

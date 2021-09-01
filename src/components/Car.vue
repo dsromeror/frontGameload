@@ -173,7 +173,7 @@ export default {
   padding-top: 12px;
   padding-bottom: 12px;
   text-align: left;
-  background-color: crimson;
+  background-color: var(--medium-blue);
   color: white;
 }
 </style>
