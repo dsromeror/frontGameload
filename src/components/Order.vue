@@ -50,6 +50,7 @@ export default {
                 productoId
                 productoCantidad
                 productoPrecio
+                productoNombre
                 estado
             }
         }
@@ -69,7 +70,7 @@ export default {
 <style>
 #Order {
   width: 100%;
-  height: 120%;
+  height: 100vh;
 
   display: flex;
   justify-content: center;

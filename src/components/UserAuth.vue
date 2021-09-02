@@ -83,6 +83,7 @@ export default {
         display: flex;
         flex-flow:column;
         justify-content:center;
+        height: 100vh;
         min-height: 100%;
         width: 100%;
         color: var(--primary-color);

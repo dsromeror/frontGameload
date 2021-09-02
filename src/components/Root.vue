@@ -1,12 +1,15 @@
 <template>
   
   <div class="wrapper__login">
-      <h2 class="nameCataloge">Lista de juegos</h2>
+      <h2 class="nameCataloge">ienvenido a nuestro proyecto del ciclo IV de Misión Tic 2022</h2>
       <section class="products">
       <Cards v-for="product in products" 
       :key="product.title" 
       :product="product"/> 
       </section>
+      <div class="gif">
+        <iframe src="https://giphy.com/embed/lBK4NoqSkwc0W62tEj" width="480" height="480" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p></p>
+      </div>
   </div>
 </template>
 

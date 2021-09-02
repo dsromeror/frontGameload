@@ -55,7 +55,7 @@ export default {
   height: auto;
   justify-content: center;
   padding: 20px 0;
-  position: absolute;
+  position: relative;
   width: 100%;
 }
 .logo-footer img {

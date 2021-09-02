@@ -1,14 +1,14 @@
 <template>
   <div class="nav__menu">
     <a>¿Qienes Somos?</a>
-    <a>Registrarse</a>
+    <a v-on:click="$router.push({name:'newuser'})">Registrarse</a>
     <!-- <Button title="Inicio" class="regular" v-on:click="$router.push({name:'root'})" /> -->
-    <Button title="Iniciar Sesión" class="regular" v-on:click="$router.push({name:'user_auth'})" />
+    <Button title="Iniciar Sesión" class="regular" v-on:click="$router.push({name:'user_auth'})" v-if="!is_auth"/>
     <!-- <Button title="Registrarse" class="regular" v-on:click="$router.push({name:'newuser'})" v-if="!is_auth" /> -->
-    <Button title="Productos" class="regular" v-on:click="products"  />
+    <Button title="Productos" class="regular" v-on:click="products"  v-if="is_auth"/>
     <!-- <Button title="Mi Carrito" class="regular" v-on:click="car"  />   -->
-    <Button title="Ordenes" class="regular" v-on:click="order"  />
-    <Button title="Cerrar Sesión" class="optional" v-on:click="logOut"  />
+    <Button title="Ordenes" class="regular" v-on:click="order"  v-if="is_auth"/>
+    <Button title="Cerrar Sesión" class="optional" v-on:click="logOut"  v-if="is_auth"/>
   </div>
 </template>
 
@@ -70,8 +70,8 @@ methods:{
     localStorage.setItem('user_id', data.user_id)
     localStorage.setItem('current_username', username)
     
-    await this.updateAccessToken();
-    if(this.is_auth) this.init();
+    // await this.updateAccessToken();
+    // if(this.is_auth) this.init();
   },
 
   init: function(){

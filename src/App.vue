@@ -1,53 +1,16 @@
 <template>
   <div id="app" class="app">
-    <div class="header">
-  
-      <nav>
-        <button v-on:click="$router.push({name:'root'})" v-if="!is_auth"> Inicio </button>
-        <button v-on:click="$router.push({name:'user_auth'})" v-if="!is_auth"> Iniciar Sesión </button>
-        <button v-on:click="$router.push({name:'newuser'})" v-if="!is_auth"> Registrarse </button>
-        <button v-on:click="init" v-if="is_auth" > Inicio </button>
-        <button v-on:click="products" v-if="is_auth" > Productos </button><!--cambiar luego, debe renderizar los productos disponibles-->
-        <button v-on:click="car" v-if="is_auth" > Mi Carrito </button><!--Cambiar y renderizar los productos cargados-->
-        <button v-on:click="order" v-if="is_auth" > Ordenes </button><!--Cambiar a la orden confirmada y precio total-->
-        <button v-on:click="logOut" v-if="is_auth" > Cerrar Sesión </button>
-      </nav>
+    <div class="header"> 
 
       <Header />
       <SubNav />
+      
     </div>.
 
     <div class="main-component">
       <router-view v-on:log-in="logIn"></router-view>
     </div>
 
-    <!-- <div class="all-footer">
-
-      <figure class="logo-footer">
-          <img src="./assets/Logos/logoWhite.png" alt="Logo">
-      </figure>
-    
-      <div class="info">
-        <a href="#">Tienda</a>
-        <a href="#">Mas reciente</a>
-        <a href="#">Accesorios premium</a>
-        <a href="#">Suscripción</a>
-      </div>
-
-      <div class="servicio">
-        <a href="#">Servicio al cliente</a>
-        <a href="#">pedidos@gamesload.com</a>
-        <a href="#">Cll 78 # 40-5 Bogotá, Colombia</a>
-        <a href="#">(+57) 369 874 21 45  -  478 214 21</a>
-      </div>
-
-      <div class="socilamedia">
-        <h2>Follow us</h2>
-        <i id="facebook" class="fab fa-facebook"></i>
-        <i id="youtube" class="fab fa-youtube"></i>
-        <i id="insta" class="fab fa-instagram"></i>
-      </div>
-    </div> -->
     <div class="footer">
       <Footer />
     </div>
@@ -65,6 +28,7 @@ export default {
   components: { Header, SubNav, Footer },
   data: function(){
     return{
+      productosDisponibles: [],
       is_auth: false
     }
 },
@@ -80,32 +44,32 @@ methods:{
       this.$router.push({name: "user_auth"})
       this.is_auth = false
       return;
-  }
+      }
 
-  await this.$apollo
-    .mutate({
-      mutation: gql`
-        mutation ($refreshTokenRefresh: String!) {
-          refreshToken(refresh: $refreshTokenRefresh) {
-            access
-          }
+      await this.$apollo
+        .mutate({
+          mutation: gql`
+            mutation ($refreshTokenRefresh: String!) {
+              refreshToken(refresh: $refreshTokenRefresh) {
+                access
+              }
+            }
+          `,
+        variables: {
+          refreshTokenRefresh: localStorage.getItem('refresh_token')
         }
-      `,
-    variables: {
-      refreshTokenRefresh: localStorage.getItem('refresh_token')
-    }
-  })
-  .then((result) => {
-    localStorage.setItem('access_token', result.data.refreshToken.access)
-    this.is_auth = true
-  })
-  .catch((error) => {
-      alert("Su sesión expiró, vuelva a iniciar sesión.")
-      this.$router.push({name: "user_auth"})
-      this.is_auth = false
-      localStorage.clear();
-    });
-  },
+      })
+      .then((result) => {
+        localStorage.setItem('access_token', result.data.refreshToken.access)
+        this.is_auth = true
+      })
+      .catch((error) => {
+          alert("Su sesión expiró, vuelva a iniciar sesión.")
+          this.$router.push({name: "user_auth"})
+          this.is_auth = false
+          localStorage.clear();
+      });
+    },
 
   logIn: async function(data, username){
     localStorage.setItem('access_token', data.access)
@@ -179,7 +143,7 @@ methods:{
       
     await this.updateAccessToken();
     },
-  },
+   },
 };
 </script>
 

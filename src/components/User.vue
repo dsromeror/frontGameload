@@ -37,7 +37,7 @@
     }
 
     #User span{
-        color: crimson;
+        color: var(--heavy-blue);
         font-weight: bold;
     }
 </style>
