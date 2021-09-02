@@ -16,7 +16,7 @@
         <td>{{ product.productoCantidad}}</td>
         <td>${{ product.productoPrecio }} COP</td>
         <td><button v-on:click="remove(product)"><i class="fas fa-minus"></i></button></td>
-        <td><button v-on:click="del(product)"><i class="fas fa-trash"></i></button></td>
+        <td><button v-on:click="del(product.productoId)"><i class="fas fa-trash"></i></button></td>
       </tr>
     </table>
     <h2>Total: $ {{ total() }} COP</h2>
@@ -155,7 +155,7 @@ export default {
         `,  
         variables:{
           eliminarProductoCarritoByUsuarioIdAndProductoIdUsuarioId: localStorage.getItem("user_id").replace(/^(0+)/g, ''),
-          eliminarProductoCarritoByUsuarioIdAndProductoIdProductoId: this.eliminarProductoCarritoByUsuarioIdAndProductoIdProductoId,
+          eliminarProductoCarritoByUsuarioIdAndProductoIdProductoId: productoId,
         },
       })
       .then((result) => {
@@ -219,6 +219,7 @@ export default {
   background: #00669F;
   color: white;
   border-radius: 10px;
+  margin: 10px;
 }
 
 .confirm:hover{
