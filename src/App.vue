@@ -16,7 +16,7 @@
     </div>.
 
     <div class="main-component">
-      <h1>Hola</h1>
+      <h2>Hola</h2>
       <router-view v-on:log-in="logIn"></router-view>
     </div>
 
@@ -147,20 +147,6 @@ methods:{
   order: function () {
     this.$router.push({
       name: "order",
-      params: { username: localStorage.getItem("current_username") },
-    });
-  },
-
-  transacction: function () {
-    this.$router.push({
-      name: "transacction",
-      params: { username: localStorage.getItem("current_username") },
-    });
-  },
-
-  historial: function () {
-    this.$router.push({
-      name: "historial",
       params: { username: localStorage.getItem("current_username") },
     });
   },

@@ -10,7 +10,7 @@
         <p>Es rápido y fácil.</p>
       </div>
       <div id="NewUser" class="newuser">
-        <form v-on:submit.prevent="proccessUser">
+        <form class="newform" v-on:submit.prevent="proccessUser">
           <input
             type="text"
             v-model="createUserUser.username"
@@ -26,13 +26,13 @@
           <input
             type="password"
             v-model="createUserUser.password"
-            placeholder="contraseña"
+            placeholder="Contraseña"
           />
           <br />
           <input
             type="email"
             v-model="createUserUser.email"
-            placeholder="email"
+            placeholder="Email"
           />
           <br />
           <input
@@ -136,7 +136,7 @@ export default {
 }
 .cabecero h2 {
   font-family: var(--ff-secondary);
-  font-size: 2em;
+  font-size: 1em;
   font-weight: 700;
   letter-spacing: var(--spacing);
 }
@@ -166,6 +166,48 @@ export default {
 }  
 .form .resaltado {
   color:var(--light-blue);
+}
+
+
+.newform h2{
+    color: #283747;
+
+}
+
+.newform form{
+    width: 50%;
+    
+}
+
+.newform input{
+    height: 40px;
+    width: 100%;
+
+    box-sizing: border-box;
+    padding: 10px 20px;
+    margin: 5px 0;
+
+    border: 1px solid #283747;
+    
+}
+
+.newform button{
+    width: 100%;
+    height: 40px;
+
+    color: #E5E7E9;
+    background: #283747;
+    border: 1px solid #E5E7E9;
+
+    border-radius: 5px;
+    padding: 10px 25px;
+    margin: 5px 0;
+}
+
+.newform button:hover{
+    color: #E5E7E9;
+    background: crimson;
+    border: 1px solid #283747;
 }
  
 @media (max-width: 480px){

@@ -17,7 +17,6 @@
         <td>${{ ord.productoPrecio }} COP</td>
       </tr>
     </table>
-    <h2>Total: </h2>
   </div>
 </template>
 

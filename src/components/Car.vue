@@ -19,7 +19,7 @@
         <td><button v-on:click="del(product)"><i class="fas fa-trash"></i></button></td>
       </tr>
     </table>
-    <h2>Total: </h2>
+    <h2>Total: $ {{ total() }} COP</h2>
     <button class="confirm" v-on:click="confirm">Confirmar carrito</button>
   </div>
 </template>
@@ -76,6 +76,14 @@ export default {
   },
 
   methods:{
+    total: function(){
+      let suma = 0;
+      this.carritoByUsuarioId.forEach((item) => {
+        suma += (item.productoCantidad * item.productoPrecio);
+      });
+      return suma;
+    },
+
     confirm: async function(){
     await this.$apollo
       .mutate({
@@ -206,13 +214,14 @@ export default {
 }
 
 .confirm{
-  width: 150px;
+  width: 15vw;
+  height: 5vh;
   background: #00669F;
   color: white;
+  border-radius: 10px;
 }
 
 .confirm:hover{
-    background-color: #ff7300;
-    box-shadow: 0px 2px 4px 2px rgb(219, 11, 11);
+    background-color:gray;
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div class="card" v-for="product in productosDisponibles" :key="product.producto_id"> 
-    <p>{{ product.nombre}}</p>
+    <h3>{{ product.nombre}}</h3>
     <div class="imagen_juego">
       <img v-bind:src="product.imagen">
     </div>
@@ -87,35 +87,37 @@ export default {
 
 <style>
 .card{
-  border: black solid 1px;
   border-radius: 10px;
-  padding: 10px 30px;
   margin: 170px 30px;
   height: 40vh;
   width: 15vw;
   justify-content: space-between;
   text-align: center;
-  background-color: #ebeff5;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  transition: .4s;
 }
 
 .card p{
   font-weight: 400;
+  font-size: 1rem;
 }
 
 .card:hover{
-  -webkit-transform: scale(1.1);
-  transform: scale(1.1);
+  -webkit-transform: scale(1.05);
+  transform: scale(1.05);
 }
 
 .card button{
-  width: 150px;
-  background: #00669F;
+  width: 15vw;
+  height: 3vh;
+  background: #2183a2;
   color: white;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
 }
 
 .card button:hover{
-    background-color: #ff7300;
-    box-shadow: 0px 2px 4px 2px rgb(219, 11, 11);
+  background-color:gray;
 }
 
 #Productos {

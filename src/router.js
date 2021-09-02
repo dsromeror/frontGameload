@@ -8,8 +8,6 @@ import Products from './components/Products'
 import Car from './components/Car'
 import Order from './components/Order'
 import Account from './components/Account'
-import Historial from './components/Historial'
-import Transacction from './components/Transacction.vue'
 
 const routes = [{
         path: '/',
@@ -50,17 +48,7 @@ const routes = [{
         path: '/order/:username',
         name: "order",
         component: Order
-    },
-    {
-        path: '/historial/:username',
-        name: "historial",
-        component: Historial
-    },
-    {
-        path: '/transacction/:username',
-        name: "transacction",
-        component: Transacction
-    }    
+    }   
 ]
 
 const router = createRouter({
