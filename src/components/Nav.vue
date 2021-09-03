@@ -65,10 +65,10 @@ methods:{
   },
 
   logIn: async function(data, username){
-    localStorage.setItem('access_token', data.access)
-    localStorage.setItem('refresh_token', data.refresh)
-    localStorage.setItem('user_id', data.user_id)
-    localStorage.setItem('current_username', username)
+    // localStorage.setItem('access_token', data.access)
+    // localStorage.setItem('refresh_token', data.refresh)
+    // localStorage.setItem('user_id', data.user_id)
+    // localStorage.setItem('current_username', username)
     
     // await this.updateAccessToken();
     // if(this.is_auth) this.init();

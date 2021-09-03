@@ -95,12 +95,12 @@ methods:{
     });
   },
 
-  products: function () {
-    this.$router.push({
-      name: "products",
-      params: { username: localStorage.getItem("current_username") },
-    });
-  },
+  // products: function () {
+  //   this.$router.push({
+  //     name: "products",
+  //     params: { username: localStorage.getItem("current_username") },
+  //   });
+  // },
 
   newuser: function () {
     this.$router.push({

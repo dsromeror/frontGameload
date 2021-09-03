@@ -1,7 +1,7 @@
 <template>
   <div id="Productos">
     <div class="card" v-for="product in productosDisponibles" :key="product.producto_id"> 
-    <p>{{ product.nombre}}</p>
+    <h4>{{ product.nombre}}</h4>
     <div class="imagen_juego">
       <img v-bind:src="product.imagen">
     </div>

@@ -16,7 +16,7 @@
         <td>{{ product.productoCantidad}}</td>
         <td>${{ product.productoPrecio }} COP</td>
         <td><button v-on:click="remove(product)"><i class="fas fa-minus"></i></button></td>
-        <td><button v-on:click="deletep(product)"><i class="fas fa-trash"></i></button></td>
+        <td><button v-on:click="del(product.productoId)"><i class="fas fa-trash"></i></button></td>
       </tr>
     </table>
     <h2>Total: </h2>
@@ -162,7 +162,7 @@ export default {
 
 </script>
 
-<style>
+<style scoped>
 #Carrito {
   width: 100%;
   height: 100vh;
@@ -208,10 +208,14 @@ export default {
   width: 150px;
   background: #00669F;
   color: white;
+  margin: 10px;
 }
 
 .confirm:hover{
     background-color: var(--medium-blue);
     box-shadow: 0px 2px 4px 2px var(--light-blue);
+}
+.fas {
+  color: var(--palette-pink);
 }
 </style>
